@@ -1,0 +1,47 @@
+import requests
+import re
+url2='http://career.nankai.edu.cn/correcruit/index.html'
+headers={'Accept': 'image/gif, image/jpeg, image/pjpeg, application/x-ms-application, application/xaml+xml, application/x-ms-xbap, */*',
+'Accept-Encoding': 'gzip, deflate',
+'Accept-Language': 'zh-CN',
+'Cache-Control': 'no-cache',
+'Connection': 'Keep-Alive',
+'Content-Length': '37',
+'Content-Type': 'application/x-www-form-urlencoded',
+'Cookie': 'security_session_verify=ce156337b9a3702b2a7fd713f11d25ad; yunsuo_session_verify=59187dcdb40de39a95de079d595b747b; PHPSESSID=o6n6n1c1fmh1r09kvdrmuefup6; Hm_lvt_6eb8a37eb57545b46494b26e6136af4a=1559603338; Hm_lpvt_6eb8a37eb57545b46494b26e6136af4a=1559604912',
+'Host': 'career.nankai.edu.cn',
+'Referer': 'http://career.nankai.edu.cn/correcruit/index.html',
+'User-Agent': 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 10.0; WOW64; Trident/7.0; .NET4.0C; .NET4.0E; .NET CLR 2.0.50727; .NET CLR 3.0.30729; .NET CLR 3.5.30729; LCTE)'}
+res=requests.post(url2,headers)
+name=re.findall('target="_blank">(.*)</a>\r\n\t\t\t\t\t',res.text)
+company=re.findall('target="_blank">(.*)</a>\t\t\t\t',res.text)
+date=re.findall('</div>\r\n\t\t\t\t  <p>(.*)</p>\r\n\t\t\t\t',res.text)
+urls=re.findall('<a class="lizw" href="(.*)" target="_blank',res.text)
+print('彭梦杰的小程序')
+print('*'*50)
+print('发布日期','招聘职位','招聘公司','链接')
+for i in range(len(company)):
+    print(date[i],name[i],company[i],'http://career.nankai.edu.cn'+urls[i])
+url='http://career.nankai.edu.cn/practice/index.html'
+headers={'Accept': 'image/gif, image/jpeg, image/pjpeg, application/x-ms-application, application/xaml+xml, application/x-ms-xbap, */*',
+'Accept-Encoding': 'gzip, deflate',
+'Accept-Language': 'zh-CN',
+'Cache-Control': 'no-cache',
+'Connection': 'Keep-Alive',
+'Content-Length': '37',
+'Content-Type': 'application/x-www-form-urlencoded',
+'Cookie': 'security_session_verify=ce156337b9a3702b2a7fd713f11d25ad; yunsuo_session_verify=59187dcdb40de39a95de079d595b747b; PHPSESSID=o6n6n1c1fmh1r09kvdrmuefup6; Hm_lvt_6eb8a37eb57545b46494b26e6136af4a=1559603338; Hm_lpvt_6eb8a37eb57545b46494b26e6136af4a=1559603493',
+'Host': 'career.nankai.edu.cn',
+'Referer': 'http://career.nankai.edu.cn/practice/index.html',
+'User-Agent': 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 10.0; WOW64; Trident/7.0; .NET4.0C; .NET4.0E; .NET CLR 2.0.50727; .NET CLR 3.0.30729; .NET CLR 3.5.30729; LCTE)'}
+res=requests.post(url,headers)
+name=re.findall('target="_blank">(.*)</a>\r\n\t\t\t\t\t',res.text)
+company=re.findall('target="_blank">(.*)</a>\t\t\t\t',res.text)
+date=re.findall('</div>\r\n\t\t\t\t  <p>(.*)</p>\r\n\t\t\t\t',res.text)
+urls=re.findall('<a class="lizw" href="(.*)" target="_blank',res.text)
+print('*'*50)
+print('发布日期','实习职位','实习公司','链接')
+for i in range(len(name)):
+    print(date[i],name[i],company[i],'http://career.nankai.edu.cn'+urls[i])
+print('*'*50)
+quit=input('按回车键退出')
